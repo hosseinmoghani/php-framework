@@ -1,0 +1,89 @@
+<?php
+fwrite(STDOUT, "\n1- New Model\n
+2- New View\n
+3- New Controller\n
+0- Exit\n
+Please enter a number : ");
+$num = trim(fgets(STDIN));
+if($num == 0){
+    exit(0);
+}
+elseif(isset($num)){
+    if($num == 1){
+        fwrite(STDOUT, "\nEnter a name for Model : ");
+        $cname = trim(fgets(STDIN));
+        if(!file_exists("./app/Model/".$cname.".php")){
+            $open = fopen("./app/Model/".$cname.".php","w");
+            fwrite($open, '<?php
+namespace app\Model;
+use core\Interface\InterfaceModel;
+use core\Database;
+
+
+class '.$cname.' implements InterfaceModel{       
+public function fetch(){
+//fetch method       
+}
+public function insert($data){
+//insert mtehod          
+}
+public function update($id, $data){
+//update method          
+}
+public function delete($id){
+//delete method     
+}
+}');
+        fclose($open);
+            exit(0);
+        }else{
+            echo "\nError, File exist in directory.\n";
+            exit(0);
+        }
+    }elseif($num == 2){
+        fwrite(STDOUT, "\nEnter a name for View : ");
+        $cname = trim(fgets(STDIN));
+        if(!file_exists("./app/View/".$cname.".php")){
+            $open = fopen("./app/View/".$cname.".php","w");
+        fwrite($open, '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../public/css/style.css">
+    <title>'.$cname.'</title>
+</head>
+<body>
+
+
+<script src="./../public/js/main.js"></script>
+</body>
+</html>');
+    fclose($open);
+        exit(0);
+        }else{
+            echo "\nError, File exist in directory.\n";
+            exit(0);
+        }
+    }elseif($num == 3){
+        fwrite(STDOUT, "\nEnter a name for Controller : ");
+        $cname = trim(fgets(STDIN));
+        if(!file_exists("./app/Controller/".$cname.".php")){
+            $open = fopen("./app/Controller/".$cname.".php","w");
+            fwrite($open, '<?php
+namespace app\Controller;
+use core\BaseController;
+    
+class '.$cname.' extends BaseController{
+    //methods controller
+}');
+        fclose($open);
+            exit(0);
+        }else{
+            echo "\nError, File exist in directory.\n";
+            exit(0);
+        }
+    }
+}
+?>
